@@ -1,0 +1,18 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Theme.ADivelog" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/DodgerBlue</item>
+        <item name="colorPrimaryDark">@color/MidnightBlue</item>
+        <item name="colorAccent">@color/Navy</item>
+        <item name="android:textColorPrimary">@color/AntiqueWhite</item>
+        <item name="android:textColorSecondary">@color/Silver</item>
+        <item name="android:windowBackground">@color/Alpha_Aqua</item>
+        <!-- Customize your theme here. -->
+    </style>
+    <style name="Theme.ADivelog.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+</resources>

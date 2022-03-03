@@ -1,0 +1,378 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/mybackground2"
+    android:padding="10dip">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="10dip">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/dive_no"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tvDiveNum"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:padding="3dip"
+            android:textColor="@android:color/primary_text_dark"
+            android:textSize="16sp" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="1dp"
+        android:background="@drawable/border"
+        android:padding="10dip">
+
+        <TextView
+            android:id="@+id/divedata"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/dive_data"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textSize="16sp"
+            android:textStyle="bold|italic" />
+
+        <TextView
+            android:id="@+id/datetext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/divedata"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:padding="3dip"
+            android:text="@string/date"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tvDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/divedata"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_toEndOf="@id/datetext"
+            android:layout_toRightOf="@id/datetext"
+            android:textColor="@android:color/primary_text_dark"
+            android:gravity="right"
+            android:padding="3dip"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/timetext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/datetext"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:padding="3dip"
+            android:text="@string/time_in"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tvTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/datetext"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_toEndOf="@id/timetext"
+            android:layout_toRightOf="@id/timetext"
+            android:textColor="@android:color/primary_text_dark"
+            android:gravity="right"
+            android:padding="3dip"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/durtext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/timetext"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:padding="3dip"
+            android:text="@string/divetime"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tvDiveTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/timetext"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_toEndOf="@id/durtext"
+            android:layout_toRightOf="@id/durtext"
+            android:textColor="@android:color/primary_text_dark"
+            android:gravity="right"
+            android:padding="3dip"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/depthtext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/durtext"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:padding="3dip"
+            android:text="@string/depth"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tvDepth"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/durtext"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_toEndOf="@id/depthtext"
+            android:layout_toRightOf="@id/depthtext"
+            android:textColor="@android:color/primary_text_dark"
+            android:gravity="right"
+            android:padding="3dip"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/atemptext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/depthtext"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:padding="3dip"
+            android:text="@string/air_temperature"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tvATemp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/depthtext"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_toEndOf="@id/atemptext"
+            android:layout_toRightOf="@id/atemptext"
+            android:textColor="@android:color/primary_text_dark"
+            android:gravity="right"
+            android:padding="3dip"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/wtemptext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/atemptext"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:padding="3dip"
+            android:text="@string/water_temperature"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tvWTemp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/atemptext"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_toEndOf="@id/wtemptext"
+            android:layout_toRightOf="@id/wtemptext"
+            android:textColor="@android:color/primary_text_dark"
+            android:gravity="right"
+            android:padding="3dip"
+            android:textSize="16sp" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="1dp"
+        android:background="@drawable/border"
+        android:padding="10dip">
+
+        <TextView
+            android:id="@+id/divesite"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/dive_site"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textSize="16sp"
+            android:textStyle="bold|italic" />
+
+        <TextView
+            android:id="@+id/spottext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/divesite"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:padding="3dip"
+            android:text="@string/spot"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tvSpot"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/divesite"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_toEndOf="@id/spottext"
+            android:layout_toRightOf="@id/spottext"
+            android:textColor="@android:color/primary_text_dark"
+            android:gravity="right"
+            android:padding="3dip"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/citytext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/spottext"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:padding="3dip"
+            android:text="@string/city"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tvCity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/spottext"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_toEndOf="@id/citytext"
+            android:layout_toRightOf="@id/citytext"
+            android:textColor="@android:color/primary_text_dark"
+            android:gravity="right"
+            android:padding="3dip"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/statetext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/citytext"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:padding="3dip"
+            android:text="@string/state"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tvState"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/citytext"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_toEndOf="@id/statetext"
+            android:layout_toRightOf="@id/statetext"
+            android:textColor="@android:color/primary_text_dark"
+            android:gravity="right"
+            android:padding="3dip"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/countrytext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/statetext"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:padding="3dip"
+            android:text="@string/country"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tvCountry"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/statetext"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_toEndOf="@id/countrytext"
+            android:layout_toRightOf="@id/countrytext"
+            android:textColor="@android:color/primary_text_dark"
+            android:gravity="right"
+            android:padding="3dip"
+            android:textSize="16sp" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/border"
+        android:orientation="horizontal"
+        android:padding="10dip">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="3dip"
+            android:text="@string/buddy"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tvBuddy"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:textColor="@android:color/primary_text_dark"
+            android:padding="3dip"
+            android:textSize="16sp" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="10dip">
+
+        <Button
+            android:id="@+id/eqm_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="onClickEquipment"
+            android:textColor="@android:color/black"
+            android:text="@string/eqm_button" />
+    </LinearLayout>
+</LinearLayout>
