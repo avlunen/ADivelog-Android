@@ -1,18 +1,19 @@
 package com.avl.adivelog;
 
 import android.content.Context;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.app.FragmentManager;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.fragment.app.FragmentManager;
 
-import com.avl.adivelog.model.ADiveLog;
 
 class MyAdapter extends FragmentPagerAdapter {
    Context context;
    int totalTabs;
+   FragmentManager m_fm;
 
    public MyAdapter(Context c, FragmentManager fm, int totalTabs) {
       super(fm);
+      m_fm = fm;
       context = c;
       this.totalTabs = totalTabs;
    }
@@ -34,5 +35,10 @@ class MyAdapter extends FragmentPagerAdapter {
    @Override
    public int getCount() {
       return totalTabs;
+   }
+
+   @Override
+   public int getItemPosition(Object object) {
+      return POSITION_NONE;
    }
 }

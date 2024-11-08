@@ -198,11 +198,37 @@
             android:textColor="@android:color/primary_text_dark"
             />
     </TableRow>
+    <TableRow>
+        <TextView
+            android:text="@string/boat_dives"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:padding="3dip"
+            android:textColor="@android:color/primary_text_dark"
+            />
+        <TextView
+            android:id="@+id/tvBoatDives"
+            android:gravity="end"
+            android:textSize="16sp"
+            android:padding="3dip"
+            android:textColor="@android:color/primary_text_dark"
+            />
+    </TableRow>
 
     <TableRow>
-        <TextView/>
         <TextView
+            android:text="@string/sea_dives"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:padding="3dip"
+            android:textColor="@android:color/primary_text_dark"
+            />
+        <TextView
+            android:id="@+id/tvSeaDives"
             android:gravity="end"
+            android:textSize="16sp"
+            android:padding="3dip"
+            android:textColor="@android:color/primary_text_dark"
             />
     </TableRow>
 
@@ -214,14 +240,23 @@
     </TableRow>
 
     <TableRow>
+        <TextView/>
+        <TextView
+            android:gravity="end"
+            />
+    </TableRow>
+
+    <TableRow>
+        <TextView/>
        <Button
             android:id="@+id/mapbutton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_span="2"
-           android:onClick="onClickMap"
+            android:layout_gravity="left"
+            android:layout_span="1"
+            android:onClick="onClickMap"
             android:text="@string/map_button"
             android:textColor="@android:color/black" />
+
     </TableRow>
 </TableLayout>

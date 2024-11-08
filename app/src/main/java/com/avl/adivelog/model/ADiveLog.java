@@ -28,6 +28,7 @@ import com.avl.adivelog.utils.UnitConverter;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.time.Period;
 import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
@@ -137,7 +138,6 @@ public class ADiveLog {
       }
       return minTemperature;
    }
-   // end of avl
 
    public String getComplete_Divetime() {
       BigDecimal divetime = new BigDecimal(0);
@@ -262,17 +262,21 @@ public class ADiveLog {
    /**
     * @return average number of dives per year
     */
-   public Double avgDivesPerYear() {
+   public String avgDivesPerYear() {
       GregorianCalendar first_dive = new GregorianCalendar();
       first_dive.setTime(getFirstDive().getDate());
       GregorianCalendar last_dive = new GregorianCalendar();
       last_dive.setTime(getLastDive().getDate());
 
+
       int years = last_dive.get(Calendar.YEAR) - first_dive.get(Calendar.YEAR);
 
-      if(years > 0) return Double.valueOf((double)dives.size() / (double)years);
+      if(years > 0) {
+         DecimalFormat df=new DecimalFormat("0.00");
+         return df.format((double)dives.size() / (double)years);
+      }
 
-      return 0.0;
+      return "0.0";
    }
    /**
     * @return the last (latest) dive in the logbook.
@@ -292,5 +296,30 @@ public class ADiveLog {
          return null;
       }
       return getDives().first();
+   }
+
+   /**
+    *
+    * @return the number of seawater dives
+    */
+   public Long getSeaDives() {
+      long seadives = 0;
+
+      for (ADive dive : dives) {
+         diveSite site = masterdata.getDiveSiteByPrivateId(dive.getDiveSiteId());
+         if(site.getWaters().contains("Sea") || site.getWaters().contains("Ocean") || site.getWaters().contains("Channel")) seadives++;
+      }
+      return seadives;
+   }
+
+   public Integer getBoatDives() {
+      int boatdives = 0;
+
+      for (ADive dive : dives) {
+         diveSite site = masterdata.getDiveSiteByPrivateId(dive.getDiveSiteId());
+         if(site.getSiteType() == 1) boatdives++;
+
+      }
+      return boatdives;
    }
 }

@@ -10,9 +10,18 @@
         <item name="android:windowBackground">@color/Alpha_Aqua</item>
         <!-- Customize your theme here. -->
     </style>
-    <style name="Theme.ADivelog.NoActionBar">
+    <style name="Theme.ADivelog.NoActionBar" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/DodgerBlue</item>
+        <item name="colorPrimaryDark">@color/MidnightBlue</item>
+        <item name="colorAccent">@color/Navy</item>
+        <item name="android:textColorPrimary">@color/AntiqueWhite</item>
+        <item name="android:textColorSecondary">@color/Silver</item>
+        <item name="android:windowBackground">@color/Alpha_Aqua</item>
+        <!-- Customize your theme here. -->
+
     </style>
 
 </resources>

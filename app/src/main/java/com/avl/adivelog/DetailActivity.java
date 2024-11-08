@@ -1,12 +1,13 @@
 package com.avl.adivelog;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
-public class DetailActivity extends Activity {
+import androidx.appcompat.app.AppCompatActivity;
+
+public class DetailActivity extends AppCompatActivity {
    private Bundle extras;
 
    @Override

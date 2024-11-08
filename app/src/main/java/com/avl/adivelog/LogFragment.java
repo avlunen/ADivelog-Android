@@ -2,14 +2,12 @@ package com.avl.adivelog;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
+import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.avl.adivelog.model.ADive;
 import com.avl.adivelog.model.ADiveLog;
@@ -18,7 +16,6 @@ import com.avl.adivelog.model.diveSite;
 import com.avl.adivelog.utils.UnitConverter;
 
 import java.text.SimpleDateFormat;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -31,18 +28,24 @@ public class LogFragment extends Fragment {
                             Bundle savedInstanceState) {
       View view = inflater.inflate(R.layout.fragment_log, container, false);
 
+      ADiveLog adl = ((MainActivity) view.getContext()).getDivelog();
+      if (adl != null) PopulateView(adl, view);
+      return view;
+   }
+
+   public View PopulateView(ADiveLog ad, View view) {
       ArrayList<ListItem> itemArray = new ArrayList<>();
       SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 
-      for(ADive d : ((MainActivity) view.getContext()).getDivelog().getDives()) {
-         diveSite v_dive_site = ((MainActivity) view.getContext()).getDivelog().getMasterdata()
+      for(ADive d : ad.getDives()) {
+         diveSite v_dive_site = ad.getMasterdata()
                .getDiveSiteByPrivateId(d.getDiveSiteId());
          ListItem it = new ListItem();
          it.setLabel(d.getDiveNumber().toString());
          it.setSite(v_dive_site.getSpot()+", "+v_dive_site.getCity()+"\n"+v_dive_site.getCountry());
          it.setData(sdf.format(d.getDate())
                + "\n" + d.getDepth() + UnitConverter.getDisplayAltitudeUnit()
-               + ", " + d.getDuration() + UnitConverter.getDisplayTimeUnit());
+               + ", " + d.getDuration().intValue() + UnitConverter.getDisplayTimeUnit());
          itemArray.add(it);
       }
       ListView listView = (ListView) view.findViewById(R.id.log_list);
@@ -77,7 +80,7 @@ public class LogFragment extends Fragment {
                extras.putString("DEPTH", getString(R.string.Empty_Cell));
             Double dur = d.getDuration();
             if(dur != null)
-               extras.putString("DURATION", dur.toString()+UnitConverter.getDisplayTimeUnit());
+               extras.putString("DURATION", Integer.valueOf(dur.intValue()).toString()+UnitConverter.getDisplayTimeUnit());
             else
                extras.putString("DURATION", getString(R.string.Empty_Cell));
             Double temp = d.getTemperature();

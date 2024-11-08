@@ -5,21 +5,17 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.preference.PreferenceManager;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+//import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 import org.osmdroid.api.IMapController;
 import org.osmdroid.config.Configuration;
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
 import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.MapView;
-import org.osmdroid.views.overlay.ItemizedIconOverlay;
-import org.osmdroid.views.overlay.ItemizedOverlayWithFocus;
 import org.osmdroid.views.overlay.Marker;
 import org.osmdroid.views.overlay.OverlayItem;
 
@@ -60,7 +56,7 @@ public class MapActivity extends AppCompatActivity {
          m.setPosition(new GeoPoint(sd.getM_latitude(),sd.getM_longitude()));
          m.setTitle(sd.getM_site_name());
          m.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_CENTER);
-         //m.setIcon(getResources().getDrawable(R.mipmap.ic_marker));
+         m.setIcon(getResources().getDrawable(R.drawable.ic_marker_diver));
          map.getOverlays().add(m);
       }
 

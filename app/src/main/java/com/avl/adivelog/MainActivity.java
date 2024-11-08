@@ -1,36 +1,37 @@
 package com.avl.adivelog;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
-import android.support.design.widget.TabLayout;
-import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
+import com.google.android.material.tabs.TabLayout;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.widget.Toolbar;
+import androidx.viewpager.widget.ViewPager;
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.avl.adivelog.model.ADiveLog;
 import com.avl.adivelog.model.diveSite;
 import com.avl.adivelog.utils.LoadDiveLog;
+import com.preference.PowerPreference;
+import com.preference.Preference;
 
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.xml.sax.SAXException;
-
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.TreeSet;
 
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
 
 public class MainActivity extends AppCompatActivity {
    TabLayout tabLayout;
    ViewPager viewPager;
 
    ADiveLog  adl;
+   Uri m_filename;
+   Preference preference;
 
    public ADiveLog getDivelog() {
       return adl;
@@ -41,7 +42,14 @@ public class MainActivity extends AppCompatActivity {
       super.onCreate(savedInstanceState);
       setContentView(R.layout.activity_main);
 
-      adl = LoadDiveLog.loadLog("avl_log.jlb", this);
+      preference = PowerPreference.getFileByName(String.valueOf(getText(R.string.pref_name)));
+      Uri uri = Uri.parse(preference.getString("uri"));
+      if(uri != null) {
+         try {
+            adl = LoadDiveLog.loadLog(uri, this);
+         }
+         catch (IOException e) { e.printStackTrace(); }
+      }
 
       // set up tabs
       tabLayout = findViewById(R.id.tabLayout);
@@ -66,6 +74,9 @@ public class MainActivity extends AppCompatActivity {
          public void onTabReselected(TabLayout.Tab tab) {
          }
       });
+
+      Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
+      setSupportActionBar(myToolbar);
    }
 
    public void onClickMap(View view) {
@@ -83,5 +94,47 @@ public class MainActivity extends AppCompatActivity {
       intent.putParcelableArrayListExtra("SPOTS",sdl);
 
       startActivity(intent);
+   }
+
+   @Override
+   protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+      super.onActivityResult(requestCode, resultCode, data);
+      if(requestCode == 123 && resultCode == RESULT_OK) {
+         m_filename = data.getData(); //The uri with the location of the file
+         try {
+            adl = LoadDiveLog.loadLog(m_filename, this);
+            if(adl != null) Toast.makeText(this, "Data loaded", Toast.LENGTH_SHORT).show();
+            else return;
+
+            MyAdapter ma = (MyAdapter) viewPager.getAdapter();
+            ma.notifyDataSetChanged();
+
+            preference.setString("uri", m_filename.toString());
+         }
+         catch (IOException e) {
+            e.printStackTrace();
+         }
+      }
+   }
+
+   // method to inflate the options menu when
+   // the user opens the menu for the first time
+   @Override
+   public boolean onCreateOptionsMenu( Menu menu ) {
+      getMenuInflater().inflate(R.menu.main, menu);
+      return super.onCreateOptionsMenu(menu);
+   }
+
+   // methods to control the operations that will
+   // happen when user clicks on the action buttons
+   @Override
+   public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+      switch (item.getItemId()){
+         case R.id.load:
+            Intent intent = new Intent().setType("*/*").setAction(Intent.ACTION_OPEN_DOCUMENT);
+            startActivityForResult(Intent.createChooser(intent, "Select a file"), 123);
+            break;
+      }
+      return super.onOptionsItemSelected(item);
    }
 }

@@ -1,6 +1,8 @@
 package com.avl.adivelog.utils;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 
 import com.avl.adivelog.model.ADive;
 import com.avl.adivelog.model.ADiveLog;
@@ -20,28 +22,29 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
+
 public class LoadDiveLog {
-   public static ADiveLog loadLog(String fn, Context con) {
+   public static ADiveLog loadLog(Uri uri, Context con) throws IOException{
       // load divelog file
-      //File file = new File(con.getFilesDir(), fn);
-      File file = new File(con.getExternalFilesDir(null), fn);
-      FileInputStream fis = null;
+      InputStream fis = null;
       ADiveLog adl = new ADiveLog();
       Masterdata md = new Masterdata();
       NodeList nList = null;
 
+      if(uri == null) return null;
+
       try {
-         fis = new FileInputStream(file);
+         con.getContentResolver().takePersistableUriPermission(uri, Intent.FLAG_GRANT_READ_URI_PERMISSION);
+         fis = con.getContentResolver().openInputStream(uri);
          ArrayList<String> itemArray = new ArrayList<>();
 
          DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
@@ -52,7 +55,7 @@ public class LoadDiveLog {
          element.normalize();
 
          // load buddies
-         nList = doc.getElementsByTagName("Buddys");
+         nList = doc.getElementsByTagName("Buddys").item(0).getChildNodes();
          for (int i = 0; i < nList.getLength(); i++) {
             Node node = nList.item(i);
             if (node.getNodeType() == Node.ELEMENT_NODE) {
@@ -64,7 +67,7 @@ public class LoadDiveLog {
             }
          }
          // load dive types
-         nList = doc.getElementsByTagName("DiveTypes");
+         nList = doc.getElementsByTagName("Divetypes").item(0).getChildNodes();
          for (int i = 0; i < nList.getLength(); i++) {
             Node node = nList.item(i);
             if (node.getNodeType() == Node.ELEMENT_NODE) {
@@ -75,7 +78,7 @@ public class LoadDiveLog {
             }
          }
          // load dive activities
-         nList = doc.getElementsByTagName("DiveActivities");
+         nList = doc.getElementsByTagName("Diveactivities").item(0).getChildNodes();
          for (int i = 0; i < nList.getLength(); i++) {
             Node node = nList.item(i);
             if (node.getNodeType() == Node.ELEMENT_NODE) {
@@ -86,7 +89,7 @@ public class LoadDiveLog {
             }
          }
          // load suits
-         nList = doc.getElementsByTagName("Suits");
+         nList = doc.getElementsByTagName("Suits").item(0).getChildNodes();
          for (int i = 0; i < nList.getLength(); i++) {
             Node node = nList.item(i);
             if (node.getNodeType() == Node.ELEMENT_NODE) {
@@ -97,7 +100,7 @@ public class LoadDiveLog {
             }
          }
          // load equipment sets
-         nList = doc.getElementsByTagName("EquipmentSets");
+         nList = doc.getElementsByTagName("EquipmentSets").item(0).getChildNodes();
          for (int i = 0; i < nList.getLength(); i++) {
             Node node = nList.item(i);
             if (node.getNodeType() == Node.ELEMENT_NODE) {
@@ -205,6 +208,11 @@ public class LoadDiveLog {
       }
       catch(Exception e) {
          e.printStackTrace();
+      }
+      finally {
+         if (adl.getDives().size() <= 0) adl = null;
+
+         if(fis != null) fis.close();
       }
 
       return adl;
